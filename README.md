@@ -4,6 +4,26 @@ A full-stack social media application built with Node.js 22, Express, PostgreSQL
 
 ---
 
+## What I Built & Decisions Made
+
+**Features implemented:**
+- Register / Login / Logout with JWT (access token 15m, refresh token 7d)
+- Create, update, soft-delete posts with optional image upload
+- Comment on posts, reply on comments
+- Like/unlike posts, comments, and replies
+- User profile view and update with profile image upload
+
+**Key decisions:**
+- **Refresh token rotation** — old refresh token is deleted and a new one is issued on every `/refresh` call, stored in DB for revocation support
+- **Soft delete on posts** — `deleted_at` column instead of hard delete, so existing comments/likes stay intact
+- **DB triggers for counts** — `like_count`, `comment_count`, `reply_count` are maintained by PostgreSQL triggers, not application code, ensuring consistency under concurrent requests
+- **Cursor-based pagination for comments/replies** — uses `created_at` as cursor for stable results; post feed uses offset-based pagination
+- **Multer + Sharp** — uploaded images are processed and resized before saving to `uploads/`
+- **Zod validation** — all request bodies validated before reaching the controller
+- **Module-based structure** — each feature (auth, post, comment, reply, like, user) has its own routes, controller, service, model, and validation file
+
+---
+
 ## Architecture
 
 ```
