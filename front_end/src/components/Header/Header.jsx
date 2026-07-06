@@ -1,11 +1,20 @@
 import React, { useState } from 'react'; 
 import Notification from '../Notifications/Notifications';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
   };
 
   return (
@@ -130,7 +139,7 @@ export default function Header() {
                   </a>
                 </li>
                 <li className="_nav_dropdown_list_item">
-                  <a href="#0" className="_nav_dropdown_link">
+                  <a href="#0" className="_nav_dropdown_link" onClick={handleLogout}>
                     <div className="_nav_drop_info">
                       <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" viewBox="0 0 19 19">
