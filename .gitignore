@@ -1,0 +1,36 @@
+# ========================
+# Dependencies
+# ========================
+node_modules/
+
+# ========================
+# Environment Variables
+# ========================
+.env
+backend/.env
+front_end/.env
+
+# ========================
+# Logs
+# ========================
+logs/
+*.log
+backend/logs/
+
+# ========================
+# Uploads
+# ========================
+backend/uploads/posts/
+
+# ========================
+# Build Output
+# ========================
+front_end/dist/
+
+# ========================
+# OS / Editor
+# ========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
